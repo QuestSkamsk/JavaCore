@@ -1,0 +1,26 @@
+package classes;
+
+
+
+public class Application {
+
+    public static void main(String[] args) {
+
+        Course c = new Course(new Obstacle[] {
+                new Cross(5),
+                new Let(3),
+                new Water(7)
+        });
+
+        Team team = new Team("The dream team",
+                new Cat("Кошак ", 5, 10, 0),
+                new Dog("Пёс ", 15, 8, 12),
+                new Hamster("Хома ", 6, 1, 5),
+                new Human("Максим ", 20, 10, 50));
+        team.getTeamInfo();
+
+        c.doIt(team);
+        team.showResults();
+
+    }
+}
