@@ -1,0 +1,34 @@
+public class main {
+    public static void main(String[] args){
+        System.out.println("Создаем справочник");
+            Directory phonebook = new Directory();
+                System.out.println("-----------------");
+
+        System.out.println("Внесём контакты в справочник");
+            phonebook.add("Сопов", "89824563399");
+                phonebook.add("Сопов", "89223135527");
+                    phonebook.add("Романов", "89174448855");
+                        phonebook.add("Новиков","89138899541");
+                            phonebook.add("Сопов", "89025557895");
+                                System.out.println("-----------------");
+
+        System.out.println("Контакты в справочнике");
+            System.out.println("Сопов");
+                System.out.println(phonebook.get("Сопов"));
+                    System.out.println("Романов");
+                        System.out.println(phonebook.get("Романов"));
+                            System.out.println("Новиков");
+                                System.out.println(phonebook.get("Новиков"));
+                                    System.out.println("-----------------");
+
+        System.out.println("Нет контакта в справочнике");
+            System.out.println("Кумов");
+                System.out.println(phonebook.get("Кумов"));
+                    System.out.println("-----------------");
+
+        System.out.println("Запишем существующий контакт");
+            phonebook.add("Сопов", "89824563399");
+                System.out.println("Сопов");
+                    System.out.println(phonebook.get("Сопов"));
+    }
+}

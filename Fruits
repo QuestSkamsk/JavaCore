@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class main {
+    public static void main(String[] args){
+        List<String> words = Arrays.asList(
+                "Банан", "Апельсин", "Яблоко", "Слива", "Груша",
+                "Хурма", "Манго", "Персик", "Слива", "Груша",
+                "Апельсин", "Яблоко", "Слива", "Манго", "Манго",
+                "Яблоко", "Слива", "Манго", "Манго", "Слива"
+        );
+        Set<String> unique = new HashSet<String>(words);
+            System.out.println("Фрукты в корзине");
+                System.out.println(words.toString());
+                    System.out.println("Виды фруктов");
+                        System.out.println(unique.toString());
+                            System.out.println("Количество каждого фрукта в корзине");
+                                for (String key : unique) {
+                                    System.out.println(key + ": " + Collections.frequency(words, key));
+        }
+    }
+}
