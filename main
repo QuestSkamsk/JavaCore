@@ -1,0 +1,18 @@
+
+
+import java.io.IOException;
+
+
+public class main {
+    public static void main(String[] args) throws IOException {
+    String cityCode = RequestHendler.detectCityId("Ekaterinburg");
+    System.out.println(cityCode);
+    String forecast = RequestHendler.getForecast(cityCode);
+    System.out.println(forecast);
+    String forecastoneday = RequestHendler.getForecastOneDay(cityCode);
+    System.out.println(forecastoneday);
+
+
+    }
+
+}

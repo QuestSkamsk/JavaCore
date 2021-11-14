@@ -1,0 +1,97 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+
+public class RequestHendler {
+
+    final static OkHttpClient okHttpClient = new OkHttpClient();
+    final static ObjectMapper objectMapper = new ObjectMapper();
+    final static String host = "dataservice.accuweather.com";
+    final static String apiKey = "XS1tbwqa0qglQDFgAzZuAAPulGrNnR7k";
+
+
+    public static String detectCityId(String cityName) throws IOException {
+        HttpUrl httpUrl = new HttpUrl.Builder()
+                .scheme("http")
+                .host(host)
+                .addPathSegments("locations")
+                .addPathSegments("v1")
+                .addPathSegments("cities")
+                .addPathSegments("search")
+                .addQueryParameter("apikey",apiKey)
+                .addQueryParameter("q", cityName)
+                .build();
+
+        Request request = new Request.Builder()
+                .addHeader("Accept", "application/json")
+                .url(httpUrl)
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+
+        String json = response.body().string();
+
+        String city = objectMapper.readTree(json).get(0).at("/LocalizedName").asText();
+        System.out.println(city);
+        String code = objectMapper.readTree(json).get(0).at("/Key").asText();
+
+        return code;
+
+    }
+
+    public static String getForecast(String cityCode) throws IOException {
+        HttpUrl httpUrl = new HttpUrl.Builder()
+                .scheme("http")
+                .host(host)
+                .addPathSegments("forecasts")
+                .addPathSegments("v1")
+                .addPathSegments("daily")
+                .addPathSegments("5day")
+                .addPathSegments(cityCode)
+                .addQueryParameter("apikey",apiKey)
+                .addQueryParameter("metric", "true")
+                .build();
+
+        Request request = new Request.Builder()
+                .addHeader("Accept", "application/json")
+                .url(httpUrl)
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+
+        String json = response.body().string();
+
+        return json;
+
+    }
+    public static String getForecastOneDay(String cityCode) throws IOException {
+        HttpUrl httpUrl = new HttpUrl.Builder()
+                .scheme("http")
+                .host(host)
+                .addPathSegments("forecasts")
+                .addPathSegments("v1")
+                .addPathSegments("daily")
+                .addPathSegments("1day")
+                .addPathSegments(cityCode)
+                .addQueryParameter("apikey",apiKey)
+                .addQueryParameter("metric", "true")
+                .build();
+
+        Request request = new Request.Builder()
+                .addHeader("Accept", "application/json")
+                .url(httpUrl)
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+
+        String json = response.body().string();
+
+        return json;
+
+    }
+
+}
