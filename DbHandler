@@ -1,0 +1,46 @@
+import org.sqlite.JDBC;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DbHandler {
+
+    public final String PATH_DB = "jdbc:sqlite:C:\\Users\\user\\IdeaProjects\\untitled10\\src\\main\\resources\\DayTemp.db";
+
+    Connection connection;
+
+    public DbHandler() throws SQLException {
+        DriverManager.registerDriver(new JDBC());
+        connection = DriverManager.getConnection(PATH_DB);
+    }
+
+    public void addDayTemp (DayTemp dayTemp) {
+        try(PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO DayTemp('date', 'maxTemp', 'minTemp')" +
+                        " VALUES(?, ?, ?)"
+        )) {
+            statement.setObject(1, dayTemp.date);
+            statement.setObject(2, dayTemp.maxTemp);
+            statement.setObject(3, dayTemp.minTemp);
+            statement.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+    public List<DayTemp> showWeather() throws SQLException {
+        List<DayTemp> daysTemp = new ArrayList<>();
+        try(Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM DayTemp");
+            while (resultSet.next()) {
+                DayTemp dayTemp = new DayTemp();
+                dayTemp.date = resultSet.getString("date");
+                dayTemp.maxTemp = resultSet.getString("maxTemp");
+                dayTemp.minTemp = resultSet.getString("minTemp");
+                daysTemp.add(dayTemp);
+            }
+        }
+        return daysTemp;
+    }
+
+}
+

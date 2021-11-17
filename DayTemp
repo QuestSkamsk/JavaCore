@@ -1,0 +1,24 @@
+public class DayTemp {
+    String date;
+    String maxTemp;
+    String minTemp;
+
+
+
+    public DayTemp(String date, String maxTemp, String minTemp) {
+        this.date = date;
+        this.maxTemp = maxTemp;
+        this.minTemp = minTemp;
+    }
+
+    public DayTemp() {
+
+    }
+
+
+    @Override
+    public String toString() {
+        return "[" + date +", " + maxTemp + ", " + minTemp + "]";
+    }
+
+}

@@ -1,0 +1,24 @@
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class main {
+    public static void main(String[] args) throws IOException, SQLException {
+
+        String cityCode = RequestHendler.detectCityId("Ekaterinburg");
+        System.out.println(cityCode);
+        String forecast = RequestHendler.getForecast(cityCode);
+        System.out.println(forecast);
+
+
+        DayTemp dayTemp = new DayTemp();
+        dayTemp.date = "2021-11-17T07:00:00+05:00";
+        dayTemp.maxTemp = "-4.3";
+        dayTemp.minTemp = "-16.7";
+        DbHandler dbHandler = new DbHandler();
+        dbHandler.addDayTemp(dayTemp);
+        System.out.println(dbHandler.showWeather());
+
+
+    }
+
+}
