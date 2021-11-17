@@ -63,7 +63,7 @@ public class RequestHendler {
 
         String forecastsJson = objectMapper.readTree(json).at("/DailyForecasts").toString();
         String dayForecast = objectMapper.readTree(forecastsJson).get(0).toString();
-        String dateJ = objectMapper.readTree(dayForecast).
+        String date = objectMapper.readTree(dayForecast).
                 at("/Date").
                 asText();
         String maxTemp = objectMapper.readTree(dayForecast).
@@ -76,7 +76,7 @@ public class RequestHendler {
                 at("/Minimum").
                 at("/Value").
                 asText();
-        System.out.println(dateJ  + " " + maxTemp + " " + minTemp);
+        System.out.println(date  + " " + maxTemp + " " + minTemp);
         return forecastsJson;
 
     }
