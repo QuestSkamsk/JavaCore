@@ -1,3 +1,4 @@
+
 import java.util.Objects;
 
 public class Course {
@@ -31,5 +32,5 @@ public class Course {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
+}
 }
